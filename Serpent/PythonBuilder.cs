@@ -22,7 +22,7 @@ public sealed class PythonBuilder
     private readonly Module _module;
     private readonly Engine _engine;
 
-    private PythonBuilder(Module module, Engine engine)
+    public PythonBuilder(Module module, Engine engine)
     {
         _module = module;
         _engine = engine;
