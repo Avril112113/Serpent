@@ -13,7 +13,7 @@ public sealed class Python
     private readonly Instance _instance;
     private readonly VirtualFileSystem _fs;
     private readonly Action _start;
-    private readonly Memory _memory;
+    public readonly Memory Memory;
 
     private SavedStack? _stack;
 
@@ -44,14 +44,14 @@ public sealed class Python
     /// <summary>
     /// Get the current memory usage of this runtime
     /// </summary>
-    public long MemoryBytes => _memory.GetLength();
+    public long MemoryBytes => Memory.GetLength();
 
     internal Python(Store store, Instance instance, VirtualFileSystem fs)
     {
         _store = store;
         _instance = instance;
         _fs = fs;
-        _memory = _instance.GetMemory("memory")!;
+        Memory = _instance.GetMemory("memory")!;
 
         _start = _instance.GetFunction("_start")?.WrapAction()
              ?? throw new InvalidOperationException("WASM instance is missing required function `_start`");
